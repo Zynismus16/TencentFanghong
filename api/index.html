@@ -1,105 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <title>请使用浏览器打开</title>
-    <style>
-        body, html {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif; /* 推荐使用通用字体 */
-        }
-        body {
-            background-color: #fff;
-            color: #2466f4; /* 主题色调 */
-        }
-        .container {
-            text-align: center;
-            padding: 20px;
-        }
-        .top-bar-guidance {
-            font-size: 14px;
-            background-color: #f0f0f0;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .top-bar-guidance p {
-            margin: 5px 0;
-        }
-        .app-download-tip {
-            background-color: #f0f0f0;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .app-download-tip .guidance-desc {
-            font-size: 14px;
-            color: #2466f4;
-        }
-        .app-download-btn {
-            display: block;
-            width: 200px;
-            height: 40px;
-            line-height: 40px;
-            margin: 10px auto;
-            text-align: center;
-            font-size: 16px;
-            color: #fff;
-            background-color: #2466f4;
-            border-radius: 20px;
-            text-decoration: none;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <title>中转</title>
 </head>
 <body>
+    <div id="tips" style="font-size:25px;text-align: center;line-height: 50px;"></div>
+    <script>
+    var url = document.location.toString();
+    var urlParmStr = url.slice(url.indexOf('=')+1);
+    var ua = navigator.userAgent.toLowerCase();
+    var isQQ = ua.indexOf('qq') != -1;
+    var isWeixin = ua.indexOf('micromessenger') != -1;
+    var isAndroid = ua.indexOf('android') != -1;
+    var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
 
-<div class="container">
-    <div class="top-bar-guidance">
-        <p>点击右上角<img src="/template/fanghong/3dian.png" alt="打开方式" class="icon-safari">在 浏览器 打开</p>
-        <p>苹果设备<img src="/template/fanghong/iphone.png" alt="苹果设备" class="icon-safari">安卓设备<img src="/template/fanghong/android.png" alt="安卓设备" class="icon-safari">↗↗↗</p>
-    </div>
+    var notice_openBrowser = "<h2>请点击右上角，通过浏览器打开本页面。</h2>"
 
-    <div id="contens">
-        <p>1. 本站不支持 微信或QQ 内访问</p>
-        <p>2. 请按提示在手机 浏览器 打开</p>
-    </div>
-
-    <div class="app-download-tip">
-        <span class="guidance-desc">点击右上角<img src="/template/fanghong/3dian.png" alt="打开方式" class="icon-sgd"> or 复制网址自行打开</span>
-    </div>
-
-    <a href="#" class="app-download-btn" onclick="copyToClipboard('shop.xn--26tv6kvoij86a.com')">点此复制本站网址</a>
-</div>
-
-<script>
-    function isWeChatOrQQ() {
-        var ua = navigator.userAgent.toLowerCase();
-        return ua.indexOf('micromessenger') !== -1 || ua.indexOf('qq') !== -1;
+    // 判断是不是在微信客户端打开
+    if(isWeixin || isQQ) {
+    // 判断是在Android的微信客户端还是Ios的微信客户端
+    if (isAndroid) {
+    document.getElementById("tips").innerHTML=notice_openBrowser;
+    }else if (isIos) {
+    document.getElementById("tips").innerHTML=notice_openBrowser;
+    }else{
+    document.getElementById("tips").innerHTML=notice_openBrowser;
     }
-
-    function copyToClipboard(text) {
-        var input = document.createElement('input');
-        input.style.position = 'fixed';
-        input.style.opacity = 0;
-        input.value = text;
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand('copy');
-        document.body.removeChild(input);
-
-        alert("复制成功，么么哒");
+    } else {
+    // 不是微信客户端，直接可以访问链接
+    if (urlParmStr == url){
+        urlParmStr = "https://zynismus16.github.io/TencentFanghong";
     }
-
-    if (!isWeChatOrQQ()) {
-        // 如果不是微信或QQ内置浏览器，重定向或者显示其他内容
-        window.location.href = "https://example.com"; // 替换为你的实际网址
+    console.log(urlParmStr);
+    location.href=urlParmStr;
     }
 </script>
-
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script><script>LA.init({id:"K8YSQIj3WDtj9gG6",ck:"K8YSQIj3WDtj9gG6"})</script>
 </body>
 </html>
